@@ -1,35 +1,34 @@
 # splunk-log-analysis.md
-## Lab: Phishing Email Investigation
+## Lab: SIEM Log Analysis – Suspicious Login Activity
 
 ### Objective
-Investigate a suspected phishing email and determine its impact on the organization.
+Analyze authentication logs in a SIEM to identify suspicious login behavior and determine potential security risks.
 
 ### Tools Used
-- SIEM
-- VirusTotal
-- Email Headers
+- Splunk
+- Windows Event Logs
 - MITRE ATT&CK
 
 ### Scenario
-User reported a suspicious email requesting credential verification.
+Multiple failed login attempts followed by a successful login were detected from a single IP address.
 
 ### Steps Taken
-1. Reviewed email headers for sender authenticity
-2. Extracted URLs and attachment hashes
-3. Analyzed indicators using VirusTotal
-4. Checked SIEM for user click activity
-5. Assessed potential account compromise
+1. Queried authentication logs using Event ID 4625 and 4624
+2. Identified repeated failed login attempts from the same IP
+3. Correlated timestamps between failed and successful attempts
+4. Checked IP reputation using threat intelligence sources
+5. Mapped behavior to MITRE technique T1110 (Brute Force)
 
 ### Findings
-- Sender domain spoofed a legitimate service
-- URL flagged as malicious by multiple vendors
-- No evidence of credential submission detected
+- Source IP showed brute-force behavior
+- Successful login occurred after multiple failures
+- Account potentially compromised
 
 ### Outcome
-Classified as **Confirmed Phishing Attempt**. Email removed from inboxes and awareness advisory sent to users.
+Alert escalated as **High Severity**. Recommended password reset, IP blocking, and enabling MFA.
 
 ### Skills Demonstrated
-- Incident Response
-- Email Security Analysis
-- Threat Intelligence
-- User Risk Assessment
+- Log Analysis
+- SIEM Querying
+- Threat Detection
+- MITRE ATT&CK Mapping
